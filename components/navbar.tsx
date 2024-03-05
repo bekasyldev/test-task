@@ -1,20 +1,6 @@
 import Link from "next/link";
 import { Menu } from "lucide-react";
-
-const links = [
-  {
-    href: "/works",
-    label: "Works",
-  },
-  {
-    href: "/blog",
-    label: "Blog",
-  },
-  {
-    href: "/contact",
-    label: "Contact",
-  },
-];
+import { links } from "@/constants";
 
 export const Navbar = () => {
   return (
