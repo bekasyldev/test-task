@@ -1,8 +1,10 @@
 "use client";
 
+import axios from "axios";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
 import { RegisterSchema } from "@/schemas";
 import { Input } from "@/components/ui/input";
@@ -18,7 +20,6 @@ import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
-import { useRouter } from "next/navigation";
 
 export const RegisterForm = () => {
   const router = useRouter();
@@ -34,20 +35,20 @@ export const RegisterForm = () => {
 
   const { isSubmitting } = form.formState;
 
-  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+  const onSubmit = async (values: z.infer<typeof RegisterSchema>) => {
     try {
-      console.log(values);
+      const response = await axios.post("/api/login", values);
       toast({
         variant: "succes",
-        title: "You succesfully created an account",
-        description: "Now you can login to your account",
+        title: "Registration Successful",
+        description: "You have successfully registered. Welcome aboard!",
       });
       router.push("/login");
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
+        title: "Something went wrong",
+        description: "Your email or password invalid",
         action: <ToastAction altText="Try again">Try again</ToastAction>,
       });
     }
