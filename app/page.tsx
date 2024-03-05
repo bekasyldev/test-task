@@ -1,9 +1,15 @@
-import Image from "next/image";
+import { Footer } from "@/components/footer";
+import { Hero } from "@/components/hero";
+import { RecentPosts } from "@/components/recent-posts";
+import { Works } from "@/components/works";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      Auth Task
-    </main>
+    <>
+      <Hero />
+      <RecentPosts />
+      <Works />
+      <Footer />
+    </>
   );
 }
